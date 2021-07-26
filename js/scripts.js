@@ -38,7 +38,7 @@ array = [{
   },
   {
     name: 'Golurk',
-    heigth: 12.8,
+    heigth: 2.8,
     type: ['ghost', 'ground']
   },
   {
@@ -92,7 +92,12 @@ console.log(array[0].type);
 console.log(array[0].type[1]);
 
 document.querySelector('h1').innerHTML = (`Number of Pokemons: ${array.length}`);
+
+//listing the names and heigths
 for (let i = 0; i < (array.length); i++) {
-  console.log(array[i].name);
-  document.write(`${array[i].name} <br>`);
+  if (array[i].heigth > 3) {
+    document.write(`<p>${array[i].name} (heigth: ${array[i].heigth}m) - WOW! That's big!</p>`)
+  } else {
+    document.write(`<p>${array[i].name} (heigth: ${array[i].heigth}m)</p>`);
+  }
 }
