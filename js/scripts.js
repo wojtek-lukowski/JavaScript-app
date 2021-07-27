@@ -96,8 +96,8 @@ document.querySelector('h1').innerHTML = (`Number of Pokemons: ${array.length}`)
 //listing the names and heigths
 for (let i = 0; i < (array.length); i++) {
   if (array[i].heigth > 3) {
-    document.write(`<p>${array[i].name} (heigth: ${array[i].heigth}m) - WOW! That's big!</p>`)
+    document.write(`<p>${array[i].name} (heigth: ${array[i].heigth}m) - WOW! That's big!</p>`)//checking for pokemons higher than 3m and addressing them with a special remark
   } else {
-    document.write(`<p>${array[i].name} (heigth: ${array[i].heigth}m)</p>`);
+    document.write(`<p>${array[i].name} (heigth: ${array[i].heigth}m)</p>`);//other pokemons fall here
   }
 }
