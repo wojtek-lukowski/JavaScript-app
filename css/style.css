@@ -109,3 +109,28 @@ main {
   animation-fill-mode: forwards;
   position: relative;
 }
+
+button,
+button:visited,
+.button,
+.button:visited {
+  display: inline-block;
+  font-size: 16px;
+  min-width: 150px;
+  text-align: center;
+  color: #ffbf00;
+  text-decoration: none;
+  background-color: transparent;
+  padding: 10px;
+  border-radius: 3px;
+  border: 1px solid #ffbf00;
+  transition: background-color .5s;
+  margin: 20px 0;
+}
+
+button:hover,
+button:active {
+  background-color: #ffbf00;
+  color: #272727;
+  cursor: pointer;
+}

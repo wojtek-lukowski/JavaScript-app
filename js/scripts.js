@@ -1,5 +1,5 @@
-let array = [];
-let pokemonList = array;
+// let array = [];
+// let pokemonList = array;
 
 array = [{
     name: 'Bulbasaur',
@@ -83,21 +83,19 @@ array = [{
   },
 ];
 
-//just playing
-console.log(pokemonList);
-console.log(`Number of Pokemons: ${array.length}`);
-console.log(array[2]);
-console.log(array[2].name);
-console.log(array[0].type);
-console.log(array[0].type[1]);
+let pokemonList = array;
 
 document.querySelector('h1').innerHTML = (`Number of Pokemons: ${array.length}`);
 
 //listing the names and heigths
-for (let i = 0; i < (array.length); i++) {
-  if (array[i].heigth > 3) {
-    document.write(`<p>${array[i].name} (heigth: ${array[i].heigth}m) - WOW! That's big!</p>`)//checking for pokemons higher than 3m and addressing them with a special remark
-  } else {
-    document.write(`<p>${array[i].name} (heigth: ${array[i].heigth}m)</p>`);//other pokemons fall here
-  }
-}
+// for (let i = 0; i < (array.length); i++) {
+//   if (array[i].heigth > 3) {
+//     document.write(`<p>${array[i].name} (heigth: ${array[i].heigth}m) - WOW! That's big!</p>`) //checking for pokemons higher than 3m and addressing them with a special remark
+//   } else {
+//     document.write(`<p>${array[i].name} (heigth: ${array[i].heigth}m)</p>`); //other pokemons fall here
+//   }
+// }
+
+pokemonList.forEach(function(pokemon) {
+  document.write(`<p>${pokemon.name}, ${pokemon.heigth}, ${pokemon.type}`);
+});
