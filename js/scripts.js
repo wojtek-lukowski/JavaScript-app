@@ -1,7 +1,7 @@
 // let array = [];
 // let pokemonList = array;
 
-array = [{
+let array = [{
     name: 'Bulbasaur',
     heigth: .7,
     type: ['grass', 'poison']
@@ -83,11 +83,9 @@ array = [{
   },
 ];
 
-let pokemonList = array;
-
 document.querySelector('h1').innerHTML = (`Number of Pokemons: ${array.length}`);
 
-//listing the names and heigths
+//"for" loop
 // for (let i = 0; i < (array.length); i++) {
 //   if (array[i].heigth > 3) {
 //     document.write(`<p>${array[i].name} (heigth: ${array[i].heigth}m) - WOW! That's big!</p>`) //checking for pokemons higher than 3m and addressing them with a special remark
@@ -96,6 +94,69 @@ document.querySelector('h1').innerHTML = (`Number of Pokemons: ${array.length}`)
 //   }
 // }
 
-pokemonList.forEach(function(pokemon) {
-  document.write(`<p>${pokemon.name}, ${pokemon.heigth}, ${pokemon.type}`);
+// "forEach" loop
+// array.forEach(function(pokemon) {
+//   document.write(`<p>${pokemon.name}, ${pokemon.heigth}, ${pokemon.type}</p>`);
+// });
+
+// Immediately Invoked Function Exporession/IIFE
+let pokemonRepository = (function() {
+  let pokemonList = [];
+
+  function add(item) {
+    pokemonList.push(item);
+  }
+
+  function getAll() {
+    return pokemonList;
+  }
+
+  function getName() {
+   pokemonList.name;
+    }
+
+  function remove(start, number) {
+    pokemonList.splice(start, number);
+  }
+
+  // function filter() {
+  //   return pokemonList.filter(pokemonList => name.length > 1);
+  // }
+
+  return {
+    add: add,
+    getAll: getAll,
+    getName: getName,
+    remove: remove,
+    //filter: filter,
+  };
+})();
+
+//adding a new pokemon (object)
+pokemonRepository.add({
+  name: 'Beedrill',
+  heigth: 1,
+  type: ['bug', 'poison']
 });
+
+//adding all the pokemons from the old list (array)
+// to the new one (pokemonRespository)
+array.forEach(function(item) {
+  pokemonRepository.add(item);
+});
+
+//removing a pokemon
+// pokemonRepository.remove(0,1);
+
+console.log(pokemonRepository.getAll()); //logs an array
+// document.write(pokemonRepository.getAll()); //logs object/object
+
+// listing the updated list to the console/document
+pokemonRepository.getAll().forEach(function(pokemon) {
+  console.log(`${pokemon.name}, ${pokemon.heigth}, ${pokemon.type}`);
+  document.write(`<p>${pokemon.name}, ${pokemon.heigth}, ${pokemon.type}</p>`);
+});
+
+// console.log(pokemonRepository.filter());
+
+// console.log(pokemonRepository.getNames());
