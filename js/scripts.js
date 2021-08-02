@@ -111,10 +111,6 @@ let pokemonRepository = (function() {
     return pokemonList;
   }
 
-  function getName() {
-   pokemonList.name;
-    }
-
   function remove(start, number) {
     pokemonList.splice(start, number);
   }
@@ -126,7 +122,6 @@ let pokemonRepository = (function() {
   return {
     add: add,
     getAll: getAll,
-    getName: getName,
     remove: remove,
     //filter: filter,
   };
@@ -165,7 +160,3 @@ if (pokemon.heigth > 2.5) {
   document.write(`<p>${pokemon.name}, ${pokemon.heigth}, ${pokemon.type}</p>`);
 }
 });
-
-// console.log(pokemonRepository.filter());
-
-// console.log(pokemonRepository.getNames());
