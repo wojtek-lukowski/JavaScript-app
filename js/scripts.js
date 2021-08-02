@@ -152,9 +152,18 @@ console.log(pokemonRepository.getAll()); //logs an array
 // document.write(pokemonRepository.getAll()); //logs object/object
 
 // listing the updated list to the console/document
+// pokemonRepository.getAll().forEach(function(pokemon) {
+//   console.log(`${pokemon.name}, ${pokemon.heigth}, ${pokemon.type}`);
+//   document.write(`<p>${pokemon.name}, ${pokemon.heigth}, ${pokemon.type}</p>`);
+// });
+
+// listing the updated list to the console/document + size condition
 pokemonRepository.getAll().forEach(function(pokemon) {
-  console.log(`${pokemon.name}, ${pokemon.heigth}, ${pokemon.type}`);
+if (pokemon.heigth > 2.5) {
+  document.write(`<p>${pokemon.name}, ${pokemon.heigth}, ${pokemon.type} - WARNING! - A big Pokemon!</p>`);
+} else {
   document.write(`<p>${pokemon.name}, ${pokemon.heigth}, ${pokemon.type}</p>`);
+}
 });
 
 // console.log(pokemonRepository.filter());
