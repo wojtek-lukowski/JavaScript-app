@@ -96,6 +96,7 @@ let pokemonRepository = (function() {
   }
 
   function remove(start, number) {
+    console.log(`${pokemonList[start].name} has been removed.`);
     pokemonList.splice(start, number);
   }
 
@@ -127,3 +128,11 @@ pokemonRepository.getAll().forEach(function(pokemon) {
     document.write(`<p>${pokemon.name}, ${pokemon.heigth}, ${pokemon.type}</p>`);
   }
 });
+
+// removes a random pokemon
+let n = pokemonRepository.getAll().length;
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+};
+let pokemonToRemove = getRandomInt(n);
+pokemonRepository.remove(getRandomInt(pokemonToRemove),1);
