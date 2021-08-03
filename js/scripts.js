@@ -1,6 +1,3 @@
-// let array = [];
-// let pokemonList = array;
-
 let array = [{
     name: 'Bulbasaur',
     heigth: .7,
@@ -85,26 +82,13 @@ let array = [{
 
 document.querySelector('h1').innerHTML = (`Number of Pokemons: ${array.length}`);
 
-//"for" loop
-// for (let i = 0; i < (array.length); i++) {
-//   if (array[i].heigth > 3) {
-//     document.write(`<p>${array[i].name} (heigth: ${array[i].heigth}m) - WOW! That's big!</p>`) //checking for pokemons higher than 3m and addressing them with a special remark
-//   } else {
-//     document.write(`<p>${array[i].name} (heigth: ${array[i].heigth}m)</p>`); //other pokemons fall here
-//   }
-// }
-
-// "forEach" loop
-// array.forEach(function(pokemon) {
-//   document.write(`<p>${pokemon.name}, ${pokemon.heigth}, ${pokemon.type}</p>`);
-// });
-
 // Immediately Invoked Function Exporession/IIFE
 let pokemonRepository = (function() {
   let pokemonList = [];
 
-  function add(item) {
-    pokemonList.push(item);
+
+  function add(pokemon) {
+    pokemonList.push(pokemon);
   }
 
   function getAll() {
@@ -115,15 +99,10 @@ let pokemonRepository = (function() {
     pokemonList.splice(start, number);
   }
 
-  // function filter() {
-  //   return pokemonList.filter(pokemonList => name.length > 1);
-  // }
-
   return {
     add: add,
     getAll: getAll,
     remove: remove,
-    //filter: filter,
   };
 })();
 
@@ -140,23 +119,11 @@ array.forEach(function(item) {
   pokemonRepository.add(item);
 });
 
-//removing a pokemon
-// pokemonRepository.remove(0,1);
-
-console.log(pokemonRepository.getAll()); //logs an array
-// document.write(pokemonRepository.getAll()); //logs object/object
-
-// listing the updated list to the console/document
-// pokemonRepository.getAll().forEach(function(pokemon) {
-//   console.log(`${pokemon.name}, ${pokemon.heigth}, ${pokemon.type}`);
-//   document.write(`<p>${pokemon.name}, ${pokemon.heigth}, ${pokemon.type}</p>`);
-// });
-
 // listing the updated list to the console/document + size condition
 pokemonRepository.getAll().forEach(function(pokemon) {
-if (pokemon.heigth > 2.5) {
-  document.write(`<p>${pokemon.name}, ${pokemon.heigth}, ${pokemon.type} - WARNING! - A big Pokemon!</p>`);
-} else {
-  document.write(`<p>${pokemon.name}, ${pokemon.heigth}, ${pokemon.type}</p>`);
-}
+  if (pokemon.heigth > 2.5) {
+    document.write(`<p>${pokemon.name}, ${pokemon.heigth}, ${pokemon.type} - WARNING! - A big Pokemon!</p>`);
+  } else {
+    document.write(`<p>${pokemon.name}, ${pokemon.heigth}, ${pokemon.type}</p>`);
+  }
 });
