@@ -96,8 +96,7 @@ let pokemonRepository = (function() {
   }
 
   function remove(start, number) {
-    document.write(`<br><p>${pokemonList[start].name} has been removed.
-      </p><p> This is the updated list:</p><br>`);
+    document.write(`<p>${pokemonList[start].name} has been removed.</p>`);
     console.log(`${pokemonList[start].name} has been removed.`);
     pokemonList.splice(start, number);
   }
@@ -122,27 +121,60 @@ array.forEach(function(item) {
   pokemonRepository.add(item);
 });
 
+// listing the updated list to the console/document + size condition
+// pokemonRepository.getAll().forEach(function(pokemon) {
+//   if (pokemon.heigth > 2.5) {
+//     document.write(`<p>${pokemon.name}, ${pokemon.heigth}, ${pokemon.type} - WARNING! - A big Pokemon!</p>`);
+//   } else {
+//     document.write(`<p>${pokemon.name}, ${pokemon.heigth}, ${pokemon.type}</p>`);
+//   }
+// });
 
 pokemonRepository.getAll().forEach(function(pokemon) {
-  let listContainer = document.querySelector('.list-container');
-  let paragraph = document.createElement('p');
-  if (pokemon.heigth > 2.5) {
-    paragraph.innerText = (`${pokemon.name}, ${pokemon.heigth}, ${pokemon.type} - WARNING! - A big Pokemon!`);
-    listContainer.appendChild(paragraph);
-  } else {
-    paragraph.innerText = (`${pokemon.name}, ${pokemon.heigth}, ${pokemon.type}`);
-    listContainer.appendChild(paragraph);
-  }
+let listContainer = document.querySelector('.list-container');
+let paragraph = document.createElement('p');
+if (pokemon.heigth > 2.5) {
+  paragraph.innerText = (`${pokemon.name}, ${pokemon.heigth}, ${pokemon.type} - WARNING! - A big Pokemon!`);
+  listContainer.appendChild(paragraph);
+} else {
+  paragraph.innerText = (`${pokemon.name}, ${pokemon.heigth}, ${pokemon.type}`);
+  listContainer.appendChild(paragraph);
+}
 });
 
-// removes a random pokemon
-let n = pokemonRepository.getAll().length;
+//adding a button for the removal of a random pokemon
+let removal = document.querySelector('.removal');
+let button = document.createElement('button');
+button.innerText = "Click to remove one Pokemon";
+removal.appendChild(button);
 
-function getRandomInt(max) {
-  return Math.floor(Math.random() * max);
+button.onclick = function remove() {
+  let n = pokemonRepository.getAll().length;
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  };
+  let pokemonToRemove = getRandomInt(n);
+  pokemonRepository.remove(getRandomInt(pokemonToRemove),1);
+
+  let elementToRemove = document.querySelectorAll('p');
+  elementToRemove.parentElement.removeChild(elementToRemove);
 };
-let pokemonToRemove = getRandomInt(n);
-pokemonRepository.remove(getRandomInt(pokemonToRemove), 1);
+
+
+
+
+
+// removes a random pokemon
+// let n = pokemonRepository.getAll().length;
+// function getRandomInt(max) {
+//   return Math.floor(Math.random() * max);
+// };
+// let pokemonToRemove = getRandomInt(n);
+// pokemonRepository.remove(getRandomInt(pokemonToRemove),1);
+
+// let elementToRemove = document.querySelectorAll('p');
+// console.log(elementToRemove);
+// elementToRemove.parentElement.removeChild(elementToRemove);
 
 // the refreshed list - the removed pokemon is not there anymore
 pokemonRepository.getAll().forEach(function(pokemon) {

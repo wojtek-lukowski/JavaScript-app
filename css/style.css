@@ -115,6 +115,7 @@ button:visited,
 .button,
 .button:visited {
   display: inline-block;
+  font-family: 'IBM Plex Mono', sans-serif;
   font-size: 16px;
   min-width: 150px;
   text-align: center;
