@@ -80,8 +80,6 @@ let array = [{
   },
 ];
 
-document.querySelector('h1').innerHTML = (`Number of Pokemons: ${array.length}`);
-
 // Immediately Invoked Function Exporession/IIFE
 let pokemonRepository = (function() {
   let pokemonList = [];
@@ -102,10 +100,21 @@ let pokemonRepository = (function() {
     pokemonList.splice(start, number);
   }
 
+  function addListItem(pokemon) {
+    let list = document.querySelector('.pokemon-list');
+    let listItem = document.createElement('li');
+    let button = document.createElement('button');
+    button.innerText = pokemon.name;
+    button.classList.add('poke-button')
+    listItem.appendChild(button);
+    list.appendChild(listItem);
+  }
+
   return {
     add: add,
     getAll: getAll,
     remove: remove,
+    addListItem: addListItem,
   };
 })();
 
@@ -116,6 +125,13 @@ pokemonRepository.add({
   type: ['bug', 'poison']
 });
 
+//add another one to have 3 columns * 6 pokemons
+pokemonRepository.add({
+  name: 'Golbat',
+  heigth: 1.6,
+  type: ['poison', 'flying']
+});
+
 //adding all the pokemons from the old list (array)
 // to the new one (pokemonRespository)
 array.forEach(function(item) {
@@ -124,31 +140,23 @@ array.forEach(function(item) {
 
 
 pokemonRepository.getAll().forEach(function(pokemon) {
-  let listContainer = document.querySelector('.list-container');
-  let paragraph = document.createElement('p');
-  if (pokemon.heigth > 2.5) {
-    paragraph.innerText = (`${pokemon.name}, ${pokemon.heigth}, ${pokemon.type} - WARNING! - A big Pokemon!`);
-    listContainer.appendChild(paragraph);
-  } else {
-    paragraph.innerText = (`${pokemon.name}, ${pokemon.heigth}, ${pokemon.type}`);
-    listContainer.appendChild(paragraph);
-  }
+pokemonRepository.addListItem(pokemon);
 });
+
+//h2 with number of pokemons
+let n = pokemonRepository.getAll().length;
+let numberHeadline = document.querySelector('.number-headline');
+let h2 = document.createElement('h2');
+h2.innerText = (`Number of Pokemons: ${n}`);
+numberHeadline.appendChild(h2);
+
+// headline.appendChild(text);
 
 // removes a random pokemon
-let n = pokemonRepository.getAll().length;
-
-function getRandomInt(max) {
-  return Math.floor(Math.random() * max);
-};
-let pokemonToRemove = getRandomInt(n);
-pokemonRepository.remove(getRandomInt(pokemonToRemove), 1);
-
-// the refreshed list - the removed pokemon is not there anymore
-pokemonRepository.getAll().forEach(function(pokemon) {
-  if (pokemon.heigth > 2.5) {
-    document.write(`<p>${pokemon.name}, ${pokemon.heigth}, ${pokemon.type} - WARNING! - A big Pokemon!</p>`);
-  } else {
-    document.write(`<p>${pokemon.name}, ${pokemon.heigth}, ${pokemon.type}</p>`);
-  }
-});
+// let n = pokemonRepository.getAll().length;
+//
+// function getRandomInt(max) {
+//   return Math.floor(Math.random() * max);
+// };
+// let pokemonToRemove = getRandomInt(n);
+// pokemonRepository.remove(getRandomInt(pokemonToRemove), 1);
