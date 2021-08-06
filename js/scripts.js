@@ -108,13 +108,21 @@ let pokemonRepository = (function() {
     button.classList.add('poke-button')
     listItem.appendChild(button);
     list.appendChild(listItem);
-  }
+    button.addEventListener('click', function showDetails(pokemon) {
+      console.log(button.innerText);
+    });
+  };
+
+  function showDetails(pokemon) {
+    console.log(pokemon.name);
+  };
 
   return {
     add: add,
     getAll: getAll,
     remove: remove,
     addListItem: addListItem,
+    showDeatils: showDetails
   };
 })();
 
@@ -140,7 +148,7 @@ array.forEach(function(item) {
 
 
 pokemonRepository.getAll().forEach(function(pokemon) {
-pokemonRepository.addListItem(pokemon);
+  pokemonRepository.addListItem(pokemon);
 });
 
 //h2 with number of pokemons
