@@ -158,8 +158,6 @@ let h2 = document.createElement('h2');
 h2.innerText = (`Number of Pokemons: ${n}`);
 numberHeadline.appendChild(h2);
 
-// headline.appendChild(text);
-
 // removes a random pokemon
 // let n = pokemonRepository.getAll().length;
 //

@@ -52,8 +52,8 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-/* end of css reset */
 
+/* end of css reset */
 body {
   font-family: 'IBM Plex Mono', sans-serif;
   font-size: 16px;
@@ -143,18 +143,26 @@ button:active,
   cursor: pointer;
 }
 
-.pokemon-list {
-  column-count: 3;
+.buttton {
+  display: inline-block;
+  width: 33%;
+}
+
+@supports (display: grid) {
+  .pokemon-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }
 
 @media only screen and (max-width: 1024px) {
   .pokemon-list {
-    column-count: 2;
+    grid-template-columns: 1fr 1fr;
   }
 }
 
 @media only screen and (max-width: 640px) {
   .pokemon-list {
-    column-count: 1;
+    grid-template-columns: 1fr;
   }
 }
