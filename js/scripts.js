@@ -1,89 +1,7 @@
-let array = [{
-    name: 'Bulbasaur',
-    heigth: .7,
-    type: ['grass', 'poison']
-  },
-  {
-    name: 'Ivysaur',
-    heigth: 1,
-    type: ['grass', 'poison']
-  },
-  {
-    name: 'Charizard',
-    heigth: 1.7,
-    type: ['fire', 'flying']
-  },
-  {
-    name: 'Blastoise',
-    heigth: 1.6,
-    type: ['water']
-  },
-  {
-    name: 'Ekans',
-    heigth: 2,
-    type: ['poison']
-  },
-  {
-    name: 'Pikachu',
-    heigth: 0.4,
-    type: ['electric']
-  },
-  {
-    name: 'Arbok',
-    heigth: 3.5,
-    type: ['poison']
-  },
-  {
-    name: 'Golurk',
-    heigth: 2.8,
-    type: ['ghost', 'ground']
-  },
-  {
-    name: 'Clefable',
-    heigth: 1.3,
-    type: ['fairy']
-  },
-  {
-    name: 'Venomoth',
-    heigth: 1.5,
-    type: ['bug', 'poison']
-  },
-  {
-    name: 'Abra',
-    heigth: .9,
-    type: ['psychic']
-  },
-  {
-    name: 'Machamp',
-    heigth: 1.6,
-    type: ['fighting']
-  },
-  {
-    name: 'Slowpoke',
-    heigth: 1.2,
-    type: ['psychic', 'water']
-  },
-  {
-    name: 'Chansei',
-    heigth: 1.1,
-    type: ['normal']
-  },
-  {
-    name: 'Forretrees',
-    heigth: 1.2,
-    type: ['steel', 'bug']
-  },
-  {
-    name: 'Palpitoad',
-    heigth: .8,
-    type: ['water', 'ground']
-  },
-];
-
 // Immediately Invoked Function Exporession/IIFE
 let pokemonRepository = (function() {
   let pokemonList = [];
-
+  let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
   function add(pokemon) {
     pokemonList.push(pokemon);
@@ -108,61 +26,69 @@ let pokemonRepository = (function() {
     button.classList.add('poke-button')
     listItem.appendChild(button);
     list.appendChild(listItem);
-    button.addEventListener('click', function showDetails(pokemon) {
-      console.log(button.innerText);
+    button.addEventListener('click', function(event) {
+      showDetails(pokemon);
     });
   };
 
-  function showDetails(pokemon) {
-    console.log(pokemon.name);
-  };
+  function loadList() {
+    return fetch(apiUrl).then(function(response) {
+      return response.json();
+    }).then(function(json) {
+      json.results.forEach(function(item) {
+        let pokemon = {
+          name: item.name,
+          detailsUrl: item.url
+        };
+        add(pokemon);
+        console.log(pokemon);
+      });
+    }).catch(function(e) {
+      console.error(e);
+    })
+  }
+
+  function loadDetails(item) {
+    let url = item.detailsUrl;
+    return fetch(url).then(function(response) {
+      return response.json();
+    }).then(function(details) {
+      // Now we add the details to the item
+      item.imageUrl = details.sprites.front_default;
+      item.height = details.height;
+      item.types = details.types;
+    }).catch(function(e) {
+      console.error(e);
+    });
+  }
+
+    function showDetails(pokemon) {
+      loadDetails(pokemon).then(function () {
+        console.log(pokemon);
+      });
+    };
 
   return {
     add: add,
     getAll: getAll,
     remove: remove,
     addListItem: addListItem,
-    showDeatils: showDetails
+    loadList: loadList,
+    loadDetils: loadDetails,
+    showDetils: showDetails
   };
 })();
 
-//adding a new pokemon (object)
-pokemonRepository.add({
-  name: 'Beedrill',
-  heigth: 1,
-  type: ['bug', 'poison']
-});
-
-//add another one to have 3 columns * 6 pokemons
-pokemonRepository.add({
-  name: 'Golbat',
-  heigth: 1.6,
-  type: ['poison', 'flying']
-});
-
-//adding all the pokemons from the old list (array)
-// to the new one (pokemonRespository)
-array.forEach(function(item) {
-  pokemonRepository.add(item);
-});
-
-
-pokemonRepository.getAll().forEach(function(pokemon) {
-  pokemonRepository.addListItem(pokemon);
+pokemonRepository.loadList().then(function() {
+  // Now the data is loaded!
+  pokemonRepository.getAll().forEach(function(pokemon) {
+    pokemonRepository.addListItem(pokemon);
+  });
 });
 
 //h2 with number of pokemons
-let n = pokemonRepository.getAll().length;
-let numberHeadline = document.querySelector('.number-headline');
-let h2 = document.createElement('h2');
-h2.innerText = (`Number of Pokemons: ${n}`);
-numberHeadline.appendChild(h2);
-
-// removes a random pokemon
 // let n = pokemonRepository.getAll().length;
-//
-// function getRandomInt(max) {
-//   return Math.floor(Math.random() * max);
-// };
-// let pokemonToRemove = getRandomInt(n);
-// pokemonRepository.remove(getRandomInt(pokemonToRemove), 1);
+// let numberHeadline = document.querySelector('.number-headline');
+// let h2 = document.createElement('h2');
+// h2.innerText = (`Number of Pokemons: ${n}`);
+// numberHeadline.appendChild(h2);
