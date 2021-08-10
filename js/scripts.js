@@ -90,8 +90,8 @@ let pokemonRepository = (function() {
     contentElement.innerText = text;
 
     let imgElement = document.createElement('img');
-    imgElement.src = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png';
-    // imgElement.src = showDetails(detailsUrl);
+    // imgElement.src = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png';
+    imgElement.src = image;
 
     modal.appendChild(closeButtonElement);
     modal.appendChild(titleElement);
