@@ -54,13 +54,20 @@ table {
 }
 
 /* end of css reset */
+
+:root {
+  --font: 'IBM Plex Mono', sand-serif;
+  --background-color: #272727;
+  --font-color: #ffbf00;
+}
+
 body {
-  font-family: 'IBM Plex Mono', sans-serif;
+  font-family: var(--font);
   font-size: 16px;
   font-weight: 300;
   line-height: 1.6;
-  color: #ffbf00;
-  background-color: #272727;
+  color: var(--font-color);
+  background-color: var(--background-color);
   text-align: center;
   margin-left: auto;
   margin-right: auto;
@@ -146,6 +153,84 @@ button:active,
 .buttton {
   display: inline-block;
   width: 33%;
+}
+
+.button-modal {
+  display: none;
+}
+
+#modal-container {
+  position: fixed;
+  padding: 20px;
+  box-sizing: border-box;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+
+  /* to show it above other content */
+  z-index: 999;
+
+  /* to allow scrolling if the screen is not high enough*/
+  overflow: auto;
+
+  /* this is used to center the modal */
+  display: grid;
+  text-align: center;
+
+  display: none;
+}
+
+#modal-container.is-visible {
+  position: fixed;
+  padding: 20px;
+  box-sizing: border-box;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  overflow: auto;
+  display: grid;
+  text-align: center;
+  display: block;
+}
+
+.modal {
+  margin: auto;
+  display: inline-block;
+  box-sizing: border-box;
+  background: var(--background-color);
+  color: var(--font-color);
+  padding: 15px;
+  width: 100%;
+  max-width: 700px;
+  text-align: left;
+  border: 1px solid var(--font-color);
+}
+
+.modal-close {
+  float: right;
+  -webkit-appearance: none;
+  border: 0;
+  background: none;
+  color: var(--font-color);
+  text-decoration: underline;
+}
+
+.modal h1 {
+  margin-top: 0;
+}
+
+.modal p {
+  margin-bottom: 0;
+}
+
+.modal img {
+  width: 300px;
+  height: auto;
 }
 
 @supports (display: grid) {

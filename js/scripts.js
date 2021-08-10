@@ -62,11 +62,66 @@ let pokemonRepository = (function() {
     });
   }
 
-    function showDetails(pokemon) {
-      loadDetails(pokemon).then(function () {
-        console.log(pokemon);
-      });
+  //modal-window
+  function showDetails(pokemon) {
+    loadDetails(pokemon).then(function() {
+      showModal((`${pokemon.name}`), (`height: ${pokemon.height}m`), pokemon.imageUrl );
+    });
+  };
+
+  //from exercise
+  function showModal(title, text, image) {
+    let modalContainer = document.querySelector('#modal-container');
+
+    modalContainer.innerHTML = '';
+
+    let modal = document.createElement('div')
+    modal.classList.add('modal');
+
+    let closeButtonElement = document.createElement('button');
+    closeButtonElement.classList.add('modal-close');
+    closeButtonElement.innerText = 'Close';
+    closeButtonElement.addEventListener('click', hideModal);
+
+    let titleElement = document.createElement('h1');
+    titleElement.innerText = title;
+
+    let contentElement = document.createElement('p');
+    contentElement.innerText = text;
+
+    let imgElement = document.createElement('img');
+    imgElement.src = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png';
+    // imgElement.src = showDetails(detailsUrl);
+
+    modal.appendChild(closeButtonElement);
+    modal.appendChild(titleElement);
+    modal.appendChild(contentElement);
+    modal.appendChild(imgElement);
+    modalContainer.appendChild(modal);
+
+    modalContainer.classList.add('is-visible');
+  };
+
+  function hideModal() {
+    let modalContainer = document.querySelector('#modal-container');
+    modalContainer.classList.remove('is-visible');
+
+  };
+
+  window.addEventListener('keydown', (e) => {
+    let modalContainer = document.querySelector('#modal-container');
+    if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
+      hideModal();
     };
+  });
+
+  let modalContainer = document.querySelector('#modal-container');
+  modalContainer.addEventListener('click', (e) => {
+    let target = e.target;
+    if (target === modalContainer) {
+      hideModal();
+    }
+  });
 
   return {
     add: add,
