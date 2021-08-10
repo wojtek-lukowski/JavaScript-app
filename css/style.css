@@ -195,7 +195,6 @@ button:active,
   overflow: auto;
   display: grid;
   text-align: center;
-  display: block;
 }
 
 .modal {
@@ -229,8 +228,9 @@ button:active,
 }
 
 .modal img {
-  width: 300px;
+  width: 200px;
   height: auto;
+  margin-left: 25%;
 }
 
 @supports (display: grid) {
