@@ -22,10 +22,11 @@ let pokemonRepository = (function() {
     let list = document.querySelector('.pokemon-list');
     let listItem = document.createElement('li');
     listItem.classList.add('group-list-item');
+    listItem.classList.add('col-lg-4', 'col-md-6', 'col');
     let button = document.createElement('button');
     button.innerText = pokemon.name;
-    button.classList.add('btn');
-    button.classList.add('btn-primary');
+    button.classList.add('btn-lg', 'btn-primary');
+    // button.classList.add('btn-primary');
     listItem.appendChild(button);
     list.appendChild(listItem);
     button.addEventListener('click', function(event) {
@@ -70,6 +71,9 @@ let pokemonRepository = (function() {
       showModal((`${pokemon.name}`), (`height: ${pokemon.height} m`), pokemon.imageUrl );
     });
   };
+
+$('#myModal').modal(options)
+
 
   //from exercise
   // function showModal(title, text, image) {
