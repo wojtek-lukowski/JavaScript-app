@@ -26,12 +26,13 @@ let pokemonRepository = (function() {
     let button = document.createElement('button');
     button.innerText = pokemon.name;
     button.classList.add('btn-lg', 'btn-primary');
-    // button.classList.add('btn-primary');
+    button.dataset.target = "#exampleModal";
+    button.dataset.toggle = "modal";
     listItem.appendChild(button);
     list.appendChild(listItem);
-    button.addEventListener('click', function(event) {
-      showDetails(pokemon);
-    });
+    // button.addEventListener('click', function(event) {
+    //   showDetails(pokemon);
+    // });
   };
 
   function loadList() {
@@ -44,7 +45,7 @@ let pokemonRepository = (function() {
           detailsUrl: item.url
         };
         add(pokemon);
-        console.log(pokemon);
+        // console.log(pokemon);
       });
     }).catch(function(e) {
       console.error(e);
@@ -66,13 +67,40 @@ let pokemonRepository = (function() {
   }
 
   //modal-window
-  function showDetails(pokemon) {
-    loadDetails(pokemon).then(function() {
-      showModal((`${pokemon.name}`), (`height: ${pokemon.height} m`), pokemon.imageUrl );
-    });
+  // function showDetails(pokemon) {
+  //   loadDetails(pokemon).then(function() {
+  //     showModal((`${pokemon.name}`), (`height: ${pokemon.height} m`), pokemon.imageUrl);
+  //   });
+  // };
+
+  // function showModal(pokemon) {
+  //   console.log('test');
+  //   let modalTitle = document.querySelector('.modal-title');
+  //   let modalContent = document.querySelector('.modal-content');
+  //   let modalHeader = document.querySelector('.modal-header');
+  //   modalContent.innerHTML = '';
+  //
+  //   let pokemonName = document.createElement('h5');
+  //   pokemonName.innerText = 'test';
+  //
+  //   modalTitle.appendChild(pokemonName);
+  // };
+
+
+
+  function showModal(pokemon) {
+    console.log('test');
+    let modalTitle = $('.modal-title');
+    let modalHeader = $('.modal-header');
+    let modalContent = $('.modal-content');
+    modalContent.empty();
+    let pokemonName = $(`<h5> ${pokemon.name} </h5>`);
+    modalTitle.append(pokemonName);
   };
 
-$('#myModal').modal(options)
+
+
+
 
 
   //from exercise
@@ -133,7 +161,8 @@ $('#myModal').modal(options)
     addListItem: addListItem,
     loadList: loadList,
     loadDetils: loadDetails,
-    showDetils: showDetails
+    showModal: showModal
+    // showDetils: showDetails
   };
 })();
 
