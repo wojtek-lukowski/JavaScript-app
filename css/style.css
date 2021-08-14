@@ -17,11 +17,3 @@ h1 {
   background-color: var(--background-color);
   color: var(--font-color);
 }
-
-/* .change-color-font {
-  color: var(--font-color);
-} */
-.change-color-button {
-  background-color: transparent;
-  color: var(--font-color);
-}
