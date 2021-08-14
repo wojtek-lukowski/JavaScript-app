@@ -1,4 +1,3 @@
-// Immediately Invoked Function Exporession/IIFE
 let pokemonRepository = (function() {
   let pokemonList = [];
   let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
@@ -71,40 +70,7 @@ let pokemonRepository = (function() {
       showModal((`${pokemon.name}`), (`height: ${pokemon.height} m`), pokemon.imageUrl);
     });
   };
-  /*
-    //"Varying modal content" from Bootstrap documentation
 
-    $('#exampleModal').on('click', function(event) {
-      console.log('showModal test');
-      let button = $(event.relatedTarget) // Button that triggered the modal
-      let titleElement = $('.modal-title');
-      let bodyElement = $('.modal-body');
-      let modalContent = $('.modal-content');
-      // modalContent.empty();
-      // Extract info from data-* attributes
-      // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-      // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-      titleElement = button.data; //do not know how to add name/heights, etc. data to button
-      console.log(titleElement);
-      let modal = $(this)
-      modal.find('.modal-title').text(`${titleElement}`);
-      // modalTitle.append(titleElement);
-      modal.find('.modal-body').text('height: test');
-      modal.find('.modal-body').text('img');
-    })*/
-
-  //jQuery
-  // function showModal(pokemon) {
-  //   console.log('showModal test');
-  //   let modalTitle = $('.modal-title');
-  //   let modalHeader = $('.modal-header');
-  //   let modalContent = $('.modal-content');
-  //   modalContent.empty();
-  //   let pokemonName = $(`<h5> ${pokemon.name} </h5>`);
-  //   modalTitle.append(pokemonName);
-  // };
-
-  //vanilla
   function showModal(title, text, image) {
     console.log('showModal running');
 
@@ -130,72 +96,21 @@ let pokemonRepository = (function() {
     modalHeader.innerHTML = '';
     modalBody.innerHTML = '';
 
-    console.log(title, text, image); //this works ok
+    console.log(title, text, image);
 
+    //dynamic modal content
     modalHeader.appendChild(titleElement);
-
     modalBody.appendChild(contentElement);
     modalBody.appendChild(imgElement);
 
-    modalHeader.appendChild(buttonX);//added close X buttonX
-    modalFooter.appendChild(buttonClose);//added Close btn-primary
+    //missing buttons ???
+    modalHeader.appendChild(buttonX); //added close X button
+    modalFooter.appendChild(buttonClose); //added Close btn-primary
 
     modalContent.appendChild(modalHeader);
     modalContent.appendChild(modalBody);
-
     modalContent.appendChild(modalFooter);
   };
-
-  //old modal window
-  // function showModal(title, text, image) {
-  //   let modalContainer = document.querySelector('#modal-container');
-  //
-  //   modalContainer.innerHTML = '';
-  //
-  //   let modal = document.createElement('div')
-  //   modal.classList.add('modal');
-  //
-  //   let closeButtonElement = document.createElement('button');
-  //   closeButtonElement.classList.add('modal-close');
-  //   closeButtonElement.innerText = 'Close';
-  //   closeButtonElement.addEventListener('click', hideModal);
-  //
-  //   let titleElement = document.createElement('h1');
-  //   titleElement.innerText = title;
-  //
-  //   let contentElement = document.createElement('p');
-  //   contentElement.innerText = text;
-  //
-  //   let imgElement = document.createElement('img');
-  //   imgElement.src = image;
-  //
-  //   modal.appendChild(closeButtonElement);
-  //   modal.appendChild(titleElement);
-  //   modal.appendChild(contentElement);
-  //   modal.appendChild(imgElement);
-  //   modalContainer.appendChild(modal);
-  //   modalContainer.classList.add('is-visible');
-  // };
-  //
-  // function hideModal() {
-  //   let modalContainer = document.querySelector('#modal-container');
-  //   modalContainer.classList.remove('is-visible');
-  // };
-  //
-  // window.addEventListener('keydown', (e) => {
-  //   let modalContainer = document.querySelector('#modal-container');
-  //   if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
-  //     hideModal();
-  //   };
-  // });
-  //
-  // let modalContainer = document.querySelector('#modal-container');
-  // modalContainer.addEventListener('click', (e) => {
-  //   let target = e.target;
-  //   if (target === modalContainer) {
-  //     hideModal();
-  //   }
-  // });
 
   return {
     add: add,
@@ -218,7 +133,5 @@ pokemonRepository.loadList().then(function() {
 
 function changeColor() {
   let body = document.querySelector('body');
-  let button = document.querySelectorAll('button');
-  body.classList.toggle('change-color-body');
-  body.classList.toggle('change-color-font');
+  body.classList.toggle('change-color');
 };

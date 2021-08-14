@@ -13,10 +13,15 @@ h1 {
   margin-bottom: 30px;
 }
 
-.change-color-body {
+.change-color {
   background-color: var(--background-color);
+  color: var(--font-color);
 }
 
-.change-color-font {
+/* .change-color-font {
+  color: var(--font-color);
+} */
+.change-color-button {
+  background-color: transparent;
   color: var(--font-color);
 }
