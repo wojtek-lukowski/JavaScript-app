@@ -72,7 +72,6 @@ let pokemonRepository = (function() {
   };
 
   function showModal(title, text, image) {
-    console.log('showModal running');
 
     let modalContent = document.querySelector('.modal-content');
 
@@ -95,8 +94,6 @@ let pokemonRepository = (function() {
     // modalContent.innerHTML = '';
     modalHeader.innerHTML = '';
     modalBody.innerHTML = '';
-
-    console.log(title, text, image);
 
     //dynamic modal content
     modalHeader.appendChild(titleElement);
