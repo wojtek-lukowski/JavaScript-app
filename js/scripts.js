@@ -28,7 +28,6 @@ let pokemonRepository = (function() {
     button.classList.add('btn-lg', 'btn-primary');
     button.dataset.target = "#exampleModal";
     button.dataset.toggle = "modal";
-    // button.onclick = showDetails(pokemon);
     listItem.appendChild(button);
     list.appendChild(listItem);
   };
@@ -77,19 +76,39 @@ let pokemonRepository = (function() {
   //   });
   // };
 
-
-  function showModal(pokemon) {
-    console.log('test');
-    let modalTitle = document.querySelector('.modal-title');
-    let modalContent = document.querySelector('.modal-content');
-    let modalHeader = document.querySelector('.modal-header');
-    modalContent.innerHTML = '';
-
-    let pokemonName = document.createElement('h5');
-    pokemonName.innerText = pokemon.name;
-
-    modalTitle.appendChild(pokemonName);
+  function showDetails(pokemon) {
+    console.log('showDeatils test')
+    loadDetails(pokemon).then(function() {
+      showModal(`${pokemon.name}`);
+    });
   };
+
+  $('#exampleModal').on('click', function(event) {
+    console.log('showModal test');
+    let button = $(event.relatedTarget) // Button that triggered the modal
+    let titleElement = $('.modal-title');
+    let bodyElement = $('.modal-body');
+    titleElement = button.data.innerText;
+    // Extract info from data-* attributes
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    let modal = $(this)
+    modal.find('.modal-title').text(`test ${titleElement}`);
+    modal.find('.modal-body').text('modal body test');
+  })
+
+  // function showModal(title) {
+  //   console.log('showModal test');
+  //   let modalTitle = document.querySelector('.modal-title');
+  //   let modalContent = document.querySelector('.modal-content');
+  //   let modalHeader = document.querySelector('.modal-header');
+  //   modalContent.innerHTML = '';
+  //
+  //   let pokemonName = document.createElement('h5');
+  //   pokemonName.innerText = title;
+  //
+  //   modalTitle.appendChild(pokemonName);
+  // };
 
 
 
@@ -162,8 +181,8 @@ let pokemonRepository = (function() {
     addListItem: addListItem,
     loadList: loadList,
     loadDetils: loadDetails,
-    showModal: showModal,
-    showDetails: showDetails
+    // showModal: showModal,
+    showDetails: showDetails,
   };
 })();
 
@@ -173,6 +192,15 @@ pokemonRepository.loadList().then(function() {
     pokemonRepository.addListItem(pokemon);
   });
 });
+
+function changeColor() {
+  let body = document.querySelector('body');
+  let button = document.querySelectorAll('button');
+  body.classList.toggle('change-color-body');
+  body.classList.toggle('change-color-font');
+  button.classList.toggle('change-color-button');
+};
+
 
 //h2 with number of pokemons
 // let n = pokemonRepository.getAll().length;
