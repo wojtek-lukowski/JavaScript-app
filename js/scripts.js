@@ -109,9 +109,8 @@ let pokemonRepository = (function() {
     console.log('showModal running');
 
     let modalContent = document.querySelector('.modal-content');
-    modalContent.innerHTML = '';
 
-    let modalTitle = document.querySelector('.modal-title');
+    let modalHeader = document.querySelector('.modal-header');
     let modalBody = document.querySelector('.modal-body');
 
     let titleElement = document.createElement('h1');
@@ -123,16 +122,19 @@ let pokemonRepository = (function() {
     let imgElement = document.createElement('img');
     imgElement.src = image;
 
-console.log(title, text, image); //this works ok
+    modalHeader.innerHTML = '';
+    modalBody.innerHTML = '';
 
-    modalContent.appendChild(titleElement);
-    modalContent.appendChild(contentElement);
-    modalContent.appendChild(imgElement);
-    modalContent.appendChild(modalTitle);
+    console.log(title, text, image); //this works ok
+
+    modalHeader.appendChild(titleElement);
+
+    modalBody.appendChild(contentElement);
+    modalBody.appendChild(imgElement);
+
+    modalContent.appendChild(modalHeader);
     modalContent.appendChild(modalBody);
   };
-
-
 
   //old modal window
   // function showModal(title, text, image) {
