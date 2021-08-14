@@ -114,7 +114,7 @@ let pokemonRepository = (function() {
     let modalTitle = document.querySelector('.modal-title');
     let modalBody = document.querySelector('.modal-body');
 
-    let titleElement = document.createElement('h5');
+    let titleElement = document.createElement('h1');
     titleElement.innerText = title;
 
     let contentElement = document.createElement('p');
@@ -125,9 +125,9 @@ let pokemonRepository = (function() {
 
 console.log(title, text, image); //this works ok
 
-    modalTitle.appendChild(titleElement);
-    modalBody.appendChild(contentElement);
-    modalBody.appendChild(imgElement);
+    modalContent.appendChild(titleElement);
+    modalContent.appendChild(contentElement);
+    modalContent.appendChild(imgElement);
     modalContent.appendChild(modalTitle);
     modalContent.appendChild(modalBody);
   };
