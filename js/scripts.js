@@ -112,6 +112,10 @@ let pokemonRepository = (function() {
 
     let modalHeader = document.querySelector('.modal-header');
     let modalBody = document.querySelector('.modal-body');
+    let modalFooter = document.querySelector('.modal-footer');
+
+    let buttonClose = document.querySelector('#close');
+
 
     let titleElement = document.createElement('h1');
     titleElement.innerText = title;
@@ -122,6 +126,7 @@ let pokemonRepository = (function() {
     let imgElement = document.createElement('img');
     imgElement.src = image;
 
+    // modalContent.innerHTML = '';
     modalHeader.innerHTML = '';
     modalBody.innerHTML = '';
 
@@ -134,6 +139,10 @@ let pokemonRepository = (function() {
 
     modalContent.appendChild(modalHeader);
     modalContent.appendChild(modalBody);
+
+    // added "close" btn-primary manually
+    modalFooter.appendChild(buttonClose);
+    modalContent.appendChild(modalFooter);
   };
 
   //old modal window
