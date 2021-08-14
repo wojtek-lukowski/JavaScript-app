@@ -115,7 +115,7 @@ let pokemonRepository = (function() {
     let modalFooter = document.querySelector('.modal-footer');
 
     let buttonClose = document.querySelector('#close');
-
+    let buttonX = document.querySelector('#button-x');
 
     let titleElement = document.createElement('h1');
     titleElement.innerText = title;
@@ -137,11 +137,12 @@ let pokemonRepository = (function() {
     modalBody.appendChild(contentElement);
     modalBody.appendChild(imgElement);
 
+    modalHeader.appendChild(buttonX);//added close X buttonX
+    modalFooter.appendChild(buttonClose);//added Close btn-primary
+
     modalContent.appendChild(modalHeader);
     modalContent.appendChild(modalBody);
 
-    // added "close" btn-primary manually
-    modalFooter.appendChild(buttonClose);
     modalContent.appendChild(modalFooter);
   };
 
