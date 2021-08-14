@@ -30,6 +30,9 @@ let pokemonRepository = (function() {
     button.dataset.toggle = "modal";
     listItem.appendChild(button);
     list.appendChild(listItem);
+    button.addEventListener('click', function(event) {
+      showDetails(pokemon);
+    });
   };
 
   function loadList() {
@@ -61,57 +64,36 @@ let pokemonRepository = (function() {
     }).catch(function(e) {
       console.error(e);
     });
-  }
-
-  //modal-window
-  function showDetails(pokemon) {
-    loadDetails(pokemon).then(function() {
-      showModal(pokemon);
-    });
   };
 
-  // function showDetails(pokemon) {
-  //   loadDetails(pokemon).then(function() {
-  //     showModal((`${pokemon.name}`), (`height: ${pokemon.height} m`), pokemon.imageUrl);
-  //   });
-  // };
-
   function showDetails(pokemon) {
-    console.log('showDeatils test')
     loadDetails(pokemon).then(function() {
-      showModal(`${pokemon.name}`);
+      showModal((`${pokemon.name}`), (`height: ${pokemon.height} m`), pokemon.imageUrl);
     });
   };
+  /*
+    //"Varying modal content" from Bootstrap documentation
 
-  $('#exampleModal').on('click', function(event) {
-    console.log('showModal test');
-    let button = $(event.relatedTarget) // Button that triggered the modal
-    let titleElement = $('.modal-title');
-    let bodyElement = $('.modal-body');
-    titleElement = button.data.innerText;
-    // Extract info from data-* attributes
-    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    let modal = $(this)
-    modal.find('.modal-title').text(`test ${titleElement}`);
-    modal.find('.modal-body').text('modal body test');
-  })
+    $('#exampleModal').on('click', function(event) {
+      console.log('showModal test');
+      let button = $(event.relatedTarget) // Button that triggered the modal
+      let titleElement = $('.modal-title');
+      let bodyElement = $('.modal-body');
+      let modalContent = $('.modal-content');
+      // modalContent.empty();
+      // Extract info from data-* attributes
+      // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+      // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+      titleElement = button.data; //do not know how to add name/heights, etc. data to button
+      console.log(titleElement);
+      let modal = $(this)
+      modal.find('.modal-title').text(`${titleElement}`);
+      // modalTitle.append(titleElement);
+      modal.find('.modal-body').text('height: test');
+      modal.find('.modal-body').text('img');
+    })*/
 
-  // function showModal(title) {
-  //   console.log('showModal test');
-  //   let modalTitle = document.querySelector('.modal-title');
-  //   let modalContent = document.querySelector('.modal-content');
-  //   let modalHeader = document.querySelector('.modal-header');
-  //   modalContent.innerHTML = '';
-  //
-  //   let pokemonName = document.createElement('h5');
-  //   pokemonName.innerText = title;
-  //
-  //   modalTitle.appendChild(pokemonName);
-  // };
-
-
-
+  //jQuery
   // function showModal(pokemon) {
   //   console.log('showModal test');
   //   let modalTitle = $('.modal-title');
@@ -121,6 +103,35 @@ let pokemonRepository = (function() {
   //   let pokemonName = $(`<h5> ${pokemon.name} </h5>`);
   //   modalTitle.append(pokemonName);
   // };
+
+  //vanilla
+  function showModal(title, text, image) {
+    console.log('showModal running');
+
+    let modalContent = document.querySelector('.modal-content');
+    modalContent.innerHTML = '';
+
+    let modalTitle = document.querySelector('.modal-title');
+    let modalBody = document.querySelector('.modal-body');
+
+    let titleElement = document.createElement('h5');
+    titleElement.innerText = title;
+
+    let contentElement = document.createElement('p');
+    contentElement.innerText = text;
+
+    let imgElement = document.createElement('img');
+    imgElement.src = image;
+
+console.log(title, text, image); //this works ok
+
+    modalTitle.appendChild(titleElement);
+    modalBody.appendChild(contentElement);
+    modalBody.appendChild(imgElement);
+    modalContent.appendChild(modalTitle);
+    modalContent.appendChild(modalBody);
+  };
+
 
 
   //old modal window
@@ -181,7 +192,7 @@ let pokemonRepository = (function() {
     addListItem: addListItem,
     loadList: loadList,
     loadDetils: loadDetails,
-    // showModal: showModal,
+    showModal: showModal,
     showDetails: showDetails,
   };
 })();
@@ -198,13 +209,4 @@ function changeColor() {
   let button = document.querySelectorAll('button');
   body.classList.toggle('change-color-body');
   body.classList.toggle('change-color-font');
-  button.classList.toggle('change-color-button');
 };
-
-
-//h2 with number of pokemons
-// let n = pokemonRepository.getAll().length;
-// let numberHeadline = document.querySelector('.number-headline');
-// let h2 = document.createElement('h2');
-// h2.innerText = (`Number of Pokemons: ${n}`);
-// numberHeadline.appendChild(h2);
