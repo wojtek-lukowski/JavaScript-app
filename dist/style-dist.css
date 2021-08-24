@@ -1,0 +1,13 @@
+.btn-lg {
+  width: 150px;
+  margin-bottom: 10px;
+}
+
+h1 {
+  margin-bottom: 30px;
+}
+
+.change-color {
+  background-color: #272727;
+  color: #ffbf00;
+}

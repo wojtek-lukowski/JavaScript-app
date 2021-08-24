@@ -13,7 +13,6 @@ let pokemonRepository = (function() {
   function remove(start, number) {
     document.write(`<br><p>${pokemonList[start].name} has been removed.
       </p><p> This is the updated list:</p><br>`);
-    console.log(`${pokemonList[start].name} has been removed.`);
     pokemonList.splice(start, number);
   }
 
@@ -25,14 +24,14 @@ let pokemonRepository = (function() {
     let button = document.createElement('button');
     button.innerText = pokemon.name;
     button.classList.add('btn-lg', 'btn-primary');
-    button.dataset.target = "#exampleModal";
-    button.dataset.toggle = "modal";
+    button.dataset.target = '#exampleModal';
+    button.dataset.toggle = 'modal';
     listItem.appendChild(button);
     list.appendChild(listItem);
-    button.addEventListener('click', function(event) {
+    button.addEventListener('click', function() {
       showDetails(pokemon);
     });
-  };
+  }
 
   function loadList() {
     return fetch(apiUrl).then(function(response) {
@@ -46,9 +45,7 @@ let pokemonRepository = (function() {
         add(pokemon);
         // console.log(pokemon);
       });
-    }).catch(function(e) {
-      console.error(e);
-    })
+    });
   }
 
   function loadDetails(item) {
@@ -60,16 +57,14 @@ let pokemonRepository = (function() {
       item.imageUrl = details.sprites.front_default;
       item.height = details.height;
       item.types = details.types;
-    }).catch(function(e) {
-      console.error(e);
     });
-  };
+  }
 
   function showDetails(pokemon) {
     loadDetails(pokemon).then(function() {
       showModal((`${pokemon.name}`), (`height: ${pokemon.height} m`), pokemon.imageUrl);
     });
-  };
+  }
 
   function showModal(title, text, image) {
 
@@ -107,7 +102,7 @@ let pokemonRepository = (function() {
     modalContent.appendChild(modalHeader);
     modalContent.appendChild(modalBody);
     modalContent.appendChild(modalFooter);
-  };
+  }
 
   return {
     add: add,
@@ -131,4 +126,7 @@ pokemonRepository.loadList().then(function() {
 function changeColor() {
   let body = document.querySelector('body');
   body.classList.toggle('change-color');
-};
+}
+
+let buttonColor = document.querySelector('#change-color');
+buttonColor.addEventListener('click', changeColor);
