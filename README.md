@@ -9,3 +9,6 @@ The project involves **HTML, CSS and JavaScript** and **runs in the browser**.
 There are two versions:
 - "main" branch - built with Bootstrap;
 - "original styling" branch - using vanilla HTML, CSS and JS only.
+
+The project can be run here:
+https://wojtek-lukowski.github.io/JavaScript-app/
